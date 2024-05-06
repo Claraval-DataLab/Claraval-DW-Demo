@@ -2,7 +2,6 @@
 **Your Merge Request Title Here:**
 
 - **What has been changed?**
-
   - Your answer here
 
 - **Why was it changed?**
