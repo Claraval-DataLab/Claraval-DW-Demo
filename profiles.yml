@@ -1,0 +1,21 @@
+claraval_dbt:
+  target: "{{ env_var('DBT_TARGET', 'dev') }}"
+  outputs:
+    prod:
+      type: bigquery
+      method: service-account
+      project: claraval-datawarehouse
+      dataset: masterdata
+      threads: 4
+      keyfile: "{{ env_var('DBT_KEYFILE_PATH') }}"
+
+    dev:
+      type: bigquery
+      method: service-account
+      project: claraval-sendbox
+      dataset: "{{ env_var('DBT_USER') }}"
+      threads: 4
+      keyfile: "{{ env_var('DBT_KEYFILE_PATH') }}"
+      # for dbt Python models
+      gcs_bucket: claraval_bucket/python_models
+      dataproc_region: us
