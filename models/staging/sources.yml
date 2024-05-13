@@ -2,7 +2,7 @@
 version: 2
 
 sources:
-  - name: models
+  - name: staging
     database: claraval-datalake
     schema: airbyte
     tables:
