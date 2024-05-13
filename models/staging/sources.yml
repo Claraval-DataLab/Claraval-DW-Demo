@@ -1,0 +1,10 @@
+
+version: 2
+
+sources:
+  - name: models
+    database: claraval-datalake
+    schema: airbyte
+    tables:
+      - name: coinmarketcap_new_tokens
+      - name: coinmarketcap_map_tokens
