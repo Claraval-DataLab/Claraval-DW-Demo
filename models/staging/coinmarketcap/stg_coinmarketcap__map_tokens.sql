@@ -19,4 +19,3 @@ final AS (
 )
 
 SELECT * FROM final
-LIMIT 1

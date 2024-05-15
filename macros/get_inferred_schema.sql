@@ -14,7 +14,9 @@
         {{ analytics_schema }}
     {%- elif 'fct_' in model_name -%}
         {{ masterdata_schema }}
-    {%- elif 'stg_' in model_name or 'int_' in model_name  -%}
+    {%- elif 'stg_' in model_name -%}
+        {{ staging_schema }}
+    {%- elif 'int_' in model_name -%}
         {{ staging_schema }}
     {%- elif 'cbo_' in model_name -%}
         {{ analytics_schema }}   
