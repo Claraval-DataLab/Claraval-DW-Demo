@@ -1,8 +1,6 @@
 
 {{ config(
         tags=['every_hour'],
-        materialized='table',
-        schema='staging',
         labels = {'every_hour': 'every_hour'})
 }}
 

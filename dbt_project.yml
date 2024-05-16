@@ -15,8 +15,6 @@ vars:
 
 on-run-start:
   - '{% do adapter.create_schema(api.Relation.create(target.project, "audit")) %}'
-  - "{{ dbt_ml.create_model_audit_table() }}"
-  - "{{ create_bq_udfs() }}"
 
 # This setting configures which "profile" dbt uses for this project.
 profile: "claraval_dbt"
@@ -50,13 +48,6 @@ models:
 
     ml_features:
       +schema: datamart
-
-    ml_predictions:
-      +schema: ml_models
-
-    monitoring:
-      +schema: monitoring
-
     staging:
       +schema: staging
 
