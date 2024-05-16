@@ -2,40 +2,67 @@ name: 'claraval_dbt'
 version: '1.0.0'
 config-version: 2
 
-# This setting configures which "profile" dbt uses for this project.
-profile: 'default'
-
 vars:
-  # global variables
   DBT_TIME_ZONE: "America/Sao_Paulo"
 
-# These configurations specify where dbt should look for different types of files.
-# The `model-paths` config, for example, states that models in this project can be
-# found in the "models/" directory. You probably won't need to change these!
+  # upstream_prod package variables
+  upstream_prod_database: claraval-datawarehouse
+  upstream_prod_env_schemas: True
+  upstream_prod_enabled: "{{ env_var('DBT_UPSTREAM_PROD_ENABLED', 'False') | as_bool }}"
+  upstream_prod_fallback: True
+  upstream_prod_prefer_recent: "{{ env_var('DBT_UPSTREAM_PROD_PREFER_RECENT', 'False') | as_bool }}"
+  disable_dbt_artifacts_autoupload: true
+
+on-run-start:
+  - '{% do adapter.create_schema(api.Relation.create(target.project, "audit")) %}'
+  - "{{ dbt_ml.create_model_audit_table() }}"
+  - "{{ create_bq_udfs() }}"
+
+# This setting configures which "profile" dbt uses for this project.
+profile: "claraval_dbt"
+
+# The `model-paths` config
 model-paths: ["models"]
-test-paths: ["tests"]
-seed-paths: ["seeds"]
-macro-paths: ["macros"]
+analysis-paths: ["analysis"]
+test-paths: ["tests/specific", "tests/unit_tests"]
+seed-paths: ["data"]
+macro-paths: ["macros", "tests/generic", "model_templates"]
 snapshot-paths: ["snapshots"]
 
-target-path: "target"  # directory which will store compiled SQL files
-clean-targets:         # directories to be removed by `dbt clean`
+target-path: "target" # directory which will store compiled SQL files
+clean-targets: # directories to be removed by `dbt clean`
   - "target"
-  - "dbt_packages"
-
+  - "dbt_modules"
 
 # Configuring models
-# Full documentation: https://docs.getdbt.com/docs/configuring-models
-
-# In dbt, the default materialization for a model is a view. This means, when you run 
-# dbt run or dbt build, all of your models will be built as a view in your data platform. 
-# The configuration below will override this setting for models in the example folder to 
-# instead be materialized as tables. Any models you add to the root of the models folder will 
-# continue to be built as views. These settings can be overridden in the individual model files
-# using the `{{ config(...) }}` macro.
+# Keep in mind that the way these configs work is strongly affected by
+# the macro in `macros/get_custom_schema.sql`.
 
 models:
-  my_new_project:
-    # Applies to all files under models/example/
-    example:
-      +materialized: table
+  bp_dbt:
+    +required_docs: true
+    +persist_docs:
+      relation: true
+      columns: true
+    materialized: view
+    # for dbt Python models
+    jar_file_uri: "gs://spark-lib/bigquery/spark-bigquery-with-dependencies_2.13-0.31.0.jar"
+
+    ml_features:
+      +schema: datamart
+
+    ml_predictions:
+      +schema: ml_models
+
+    monitoring:
+      +schema: monitoring
+
+    staging:
+      +schema: staging
+
+    analytics:
+      +schema: analytics
+
+    functions:
+      tag_score:
+        +post-hook: "{{ custom_grant_access_to(this, [('bp-datawarehouse', 'staging'), ('bp-datawarehouse', 'masterdata'), ('bp-datawarehouse', 'datamart'), ('bp-datawarehouse', 'ml_models')]) }}"
