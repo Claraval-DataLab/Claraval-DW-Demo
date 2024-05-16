@@ -2,7 +2,7 @@
 -- in dbt projects to eliminate inconsistencies and redundancies. 
 -- Args: variable_name: descriptions
 
-{% macro variables_metadata(variable_name) %}
+{% macro variables_description(variable_name) %}
 {% set descriptions = {
   'id_airbyte_raw': 'ID from Airbyte raw data',
   'dt_extracted_at': 'Extraction date and time',
