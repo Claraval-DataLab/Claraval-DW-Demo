@@ -1,7 +1,3 @@
--- Business Goal: Get CoinMarketCap map all tokens from https://coinmarketcap.com/pt-br/
--- Creator: Diego Garcia
--- Created at: 2024-05-14
-
 WITH src_coinmarketcap__map_tokens AS (
     SELECT * FROM {{ source('coinmarketcap','map_tokens') }}
 ),

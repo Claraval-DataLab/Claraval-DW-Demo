@@ -1,7 +1,3 @@
--- Business Goal: Get CoinMarketCap new tokens from https://coinmarketcap.com/new/
--- Creator: Diego Garcia
--- Created at: 2024-05-15
-
 WITH src_coinmarketcap__new_tokens AS (
     SELECT * FROM {{ source('coinmarketcap','new_tokens') }}
 ),
