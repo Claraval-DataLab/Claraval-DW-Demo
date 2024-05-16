@@ -4,24 +4,24 @@
 
 {% macro get_inferred_schema(model_name) %}
 
-    {%- set masterdata_schema = 'masterdata' -%}
-    {%- set analytics_schema = 'analytics' -%}
-    {%- set staging_schema = 'staging' -%}
+  {%- set masterdata_schema = 'masterdata' -%}
+  {%- set analytics_schema = 'analytics' -%}
+  {%- set staging_schema = 'staging' -%}
 
-    {%- if 'dim_' in model_name -%}
-        {{ masterdata_schema }}
-    {%- elif 'dtm_' in model_name -%}
-        {{ analytics_schema }}
-    {%- elif 'fct_' in model_name -%}
-        {{ masterdata_schema }}
-    {%- elif 'stg_' in model_name -%}
-        {{ staging_schema }}
-    {%- elif 'int_' in model_name -%}
-        {{ staging_schema }}
-    {%- elif 'cbo_' in model_name -%}
-        {{ analytics_schema }}   
-    {%- else -%}
-        {{ staging_schema }}
-    {%- endif -%}
+  {%- if startswith(model_name, 'dim_') -%}
+    {{ masterdata_schema }}
+  {%- elif startswith(model_name, 'dtm_') -%}
+    {{ analytics_schema }}
+  {%- elif startswith(model_name, 'fct_') -%}
+    {{ masterdata_schema }}
+  {%- elif startswith(model_name, 'stg_') -%}
+    {{ staging_schema }}
+  {%- elif startswith(model_name, 'int_') -%}
+    {{ staging_schema }}
+  {%- elif startswith(model_name, 'cbo_') -%}
+    {{ analytics_schema }}   
+  {%- else -%}
+    {{ staging_schema }}
+  {%- endif -%}
 
 {% endmacro %}
