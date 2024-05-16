@@ -1,4 +1,11 @@
 
+{{ config(
+        tags=['every_hour'],
+        materialized='table',
+        schema='staging',
+        labels = {'every_hour': 'every_hour'})
+}}
+
 WITH src_coinmarketcap__map_tokens AS (
     SELECT * FROM {{ source('coinmarketcap','map_tokens') }}
 ),

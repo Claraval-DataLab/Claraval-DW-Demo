@@ -1,17 +1,10 @@
 version: 2
 
 models:
-  - name: stg_coinmarketcap__map_tokens
-    description: "Staging model to transform data of CoinMarketCap map tokens"
-    columns:
-      - name: id_airbyte_raw
-        description: "Teste"
-      - name: dt_extracted_at
-        description: "{{ var('variables_descriptions', 'dt_extracted_at') }}"
-      - name: js_airbyte_metadata
-        description: "{{ var('variables_descriptions', 'js_airbyte_metadata') }}"
-      - name: js_new_tokens_data
-        description: "{{ var('variables_descriptions', 'js_new_tokens_data') }}"
-      - name: js_new_tokens_status
-        description: "{{ var('variables_descriptions', 'js_new_tokens_status') }}"
+    - name: stg_coinmarketcap__map_tokens
+      description: "Staging model to transform data of CoinMarketCap map tokens"
+
+      columns: 
+          - name: id_airbyte_raw
+            description: "Teste 2"
 
