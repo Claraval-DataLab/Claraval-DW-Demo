@@ -1,3 +1,4 @@
+
 WITH src_coinmarketcap__new_tokens AS (
     SELECT * FROM {{ source('coinmarketcap','new_tokens') }}
 ),

@@ -5,7 +5,7 @@ models:
     description: "Staging model to transform data of CoinMarketCap map tokens"
     columns:
       - name: id_airbyte_raw
-        description: "{{ var('variables_description', 'id_airbyte_raw') }}"
+        description: "Teste"
       - name: dt_extracted_at
         description: "{{ var('variables_description', 'dt_extracted_at') }}"
       - name: js_airbyte_metadata
