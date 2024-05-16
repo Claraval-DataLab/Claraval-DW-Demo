@@ -1,16 +1,14 @@
 packages:
-- package: dbt-labs/audit_helper
-  version: 0.9.0
-- package: tnightengale/dbt_meta_testing
-  version: 0.3.6
-- package: dbt-labs/codegen
-  version: 0.12.1
-- package: kristeligt-dagblad/dbt_ml
-  version: 0.6.0
-- package: dbt-labs/dbt_utils
-  version: 1.1.1
-- package: elementary-data/elementary
-  version: 0.13.2
-- package: EqualExperts/dbt_unit_testing
-  version: 0.4.12
-sha1_hash: 6de2f298ed895c380e9f5c1c0283a0ae310677fe
+  - package: dbt-labs/audit_helper
+    version: 0.9.0
+  - package: tnightengale/dbt_meta_testing
+    version: 0.3.6
+  - package: dbt-labs/codegen
+    version: 0.12.1
+  - package: dbt-labs/dbt_utils
+    version: 1.1.1
+  - package: elementary-data/elementary
+    version: 0.13.2
+  - package: EqualExperts/dbt_unit_testing
+    version: 0.4.12
+sha1_hash: b8c02f530422d18b33d47a2617a2ee3499b9bba9

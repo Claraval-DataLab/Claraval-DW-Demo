@@ -2,9 +2,9 @@
 version: 2
 
 sources:
-  - name: airbyte
+  - name: coinmarketcap
     database: claraval-datalake
-    schema: airbyte
+    schema: coinmarketcap
     tables:
-      - name: coinmarketcap_new_tokens
-      - name: coinmarketcap_map_tokens
+      - name: new_tokens
+      - name: map_tokens
