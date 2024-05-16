@@ -5,7 +5,28 @@ models:
     description: "Staging model to transform data of CoinMarketCap map tokens"
     config:
       meta: {
-        'business_goal': 'Get CoinMarketCap map all tokens from https://coinmarketcap.com/pt-br/',
+        'business_goal': 'Get CoinMarketCap map all tokens from https://coinmarketcap.com/',
+        'creator': 'Diego Garcia',
+        'created_at': '2024-05-14' }
+
+    columns:
+      - name: id_airbyte_raw
+        description: "{{ var('variables_metadata', 'id_airbyte_raw') }}"
+      - name: dt_extracted_at
+        description: "{{ var('variables_metadata', 'dt_extracted_at') }}"
+      - name: js_airbyte_metadata
+        description: "{{ var('variables_metadata', 'js_airbyte_metadata') }}"
+      - name: js_new_tokens_data
+        description: "{{ var('variables_metadata', 'js_new_tokens_data') }}"
+      - name: js_new_tokens_status
+        description: "{{ var('variables_metadata', 'js_new_tokens_status') }}"
+
+
+  - name: stg_coinmarketcap__new_tokens
+    description: "Staging model to transform data of CoinMarketCap new tokens"
+    config:
+      meta: {
+        'business_goal': 'Get CoinMarketCap map all tokens from https://coinmarketcap.com/new',
         'creator': 'Diego Garcia',
         'created_at': '2024-05-14' }
         
