@@ -37,7 +37,7 @@ clean-targets: # directories to be removed by `dbt clean`
 # the macro in `macros/get_custom_schema.sql`.
 
 models:
-  bp_dbt:
+  claraval_dbt:
     +required_docs: true
     +persist_docs:
       relation: true
@@ -53,7 +53,3 @@ models:
 
     analytics:
       +schema: analytics
-
-    functions:
-      tag_score:
-        +post-hook: "{{ custom_grant_access_to(this, [('bp-datawarehouse', 'staging'), ('bp-datawarehouse', 'masterdata'), ('bp-datawarehouse', 'datamart'), ('bp-datawarehouse', 'ml_models')]) }}"
